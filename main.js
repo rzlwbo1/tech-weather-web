@@ -11,7 +11,7 @@ const formElem = document.querySelector("form");
 
 
 // fetch cuaca
-const getCuacaApi = (evt) => {
+const getCuacaApi = async (evt) => {
 
   evt.preventDefault();
 
@@ -20,70 +20,60 @@ const getCuacaApi = (evt) => {
 
   cityElem.innerHTML = inputUser.slice(0,1).toUpperCase() + inputUser.slice(1);
 
+  const responseApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputUser}&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
 
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputUser}&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`)
-  .then(res => res.json())
-  .then(data => {
+  const data = await responseApi.json();
 
-    // to dom
-    let cuaca = data.weather[0].main;
-    mainCuacaElem.innerHTML = cuaca.slice(0,1).toUpperCase() + cuaca.slice(1);
+  // to dom
+  let cuaca = data.weather[0].main;
+  mainCuacaElem.innerHTML = cuaca.slice(0,1).toUpperCase() + cuaca.slice(1);
 
-    let temp = data.main.temp;
-    tempNowElem.innerHTML = temp + ' Celcius';
-
-
-    let tekanan = data.main.pressure;
-    tekananElem.innerHTML = `${tekanan} Pha`;
+  let temp = data.main.temp;
+  tempNowElem.innerHTML = temp + ' Celcius';
 
 
-    let lembap = data.main.humidity;
-    lembapElem.innerHTML = `${lembap}`;
-
-    let angin = data.wind.speed;
-    anginElem.innerHTML = `${angin}`;
-
-    console.log(data.wind);
+  let tekanan = data.main.pressure;
+  tekananElem.innerHTML = `${tekanan} Pha`;
 
 
-  })
-  .catch(err => console.log(err.message))
+  let lembap = data.main.humidity;
+  lembapElem.innerHTML = `${lembap}`;
 
+  let angin = data.wind.speed;
+  anginElem.innerHTML = `${angin}`;
+
+  console.log(data.wind);
 }
 
 formElem.addEventListener('submit', getCuacaApi)
 
 
-const getCuacaApDefault = () => {
+const getCuacaApDefault = async () => {
 
 
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=bekasi&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`)
-  .then(res => res.json())
-  .then(data => {
+  const responseApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=bekasi&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
 
-    // to dom
-    let cuaca = data.weather[0].main;
-    mainCuacaElem.innerHTML = cuaca.slice(0,1).toUpperCase() + cuaca.slice(1);
+  const data = await responseApi.json();
 
-    let temp = data.main.temp;
-    tempNowElem.innerHTML = temp + ' Celcius';
+  // to dom
+  let cuaca = data.weather[0].main;
+  mainCuacaElem.innerHTML = cuaca.slice(0,1).toUpperCase() + cuaca.slice(1);
 
-
-    let tekanan = data.main.pressure;
-    tekananElem.innerHTML = `${tekanan} Pha`;
+  let temp = data.main.temp;
+  tempNowElem.innerHTML = temp + ' Celcius';
 
 
-    let lembap = data.main.humidity;
-    lembapElem.innerHTML = `${lembap}`;
-
-    let angin = data.wind.speed;
-    anginElem.innerHTML = `${angin}`;
-
-    console.log(data.wind);
+  let tekanan = data.main.pressure;
+  tekananElem.innerHTML = `${tekanan} Pha`;
 
 
-  })
-  .catch(err => console.log(err.message))
+  let lembap = data.main.humidity;
+  lembapElem.innerHTML = `${lembap}`;
+
+  let angin = data.wind.speed;
+  anginElem.innerHTML = `${angin}`;
+
+  console.log(data.wind);
 
 }
 
