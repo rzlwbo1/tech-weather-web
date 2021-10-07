@@ -13,36 +13,44 @@ const formElem = document.querySelector("form");
 // fetch cuaca
 const getCuacaApi = async (evt) => {
 
-  evt.preventDefault();
+  try {
 
-  const inputUser = document.querySelector("input").value;
-  const cityElem = document.querySelector(".city");
+    evt.preventDefault();
 
-  cityElem.innerHTML = inputUser.slice(0,1).toUpperCase() + inputUser.slice(1);
+    const inputUser = document.querySelector("input").value;
+    const cityElem = document.querySelector(".city");
 
-  const responseApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputUser}&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
+    cityElem.innerHTML = inputUser.slice(0,1).toUpperCase() + inputUser.slice(1);
 
-  const data = await responseApi.json();
+    const responseApi = await fetch(`https://api.openweatherma.org/data/2.5/weather?q=${inputUser}&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
 
-  // to dom
-  let cuaca = data.weather[0].main;
-  mainCuacaElem.innerHTML = cuaca.slice(0,1).toUpperCase() + cuaca.slice(1);
+    const data = await responseApi.json();
 
-  let temp = data.main.temp;
-  tempNowElem.innerHTML = temp + ' Celcius';
+    // to dom
+    let cuaca = data.weather[0].main;
+    mainCuacaElem.innerHTML = cuaca.slice(0,1).toUpperCase() + cuaca.slice(1);
 
-
-  let tekanan = data.main.pressure;
-  tekananElem.innerHTML = `${tekanan} Pha`;
+    let temp = data.main.temp;
+    tempNowElem.innerHTML = temp + ' Celcius';
 
 
-  let lembap = data.main.humidity;
-  lembapElem.innerHTML = `${lembap}`;
+    let tekanan = data.main.pressure;
+    tekananElem.innerHTML = `${tekanan} Pha`;
 
-  let angin = data.wind.speed;
-  anginElem.innerHTML = `${angin}`;
 
-  console.log(data.wind);
+    let lembap = data.main.humidity;
+    lembapElem.innerHTML = `${lembap}`;
+
+    let angin = data.wind.speed;
+    anginElem.innerHTML = `${angin}`;
+
+    console.log(data.wind);
+
+  } catch(err) {
+    console.log(err.message);
+  }
+
+  
 }
 
 formElem.addEventListener('submit', getCuacaApi)
@@ -51,29 +59,35 @@ formElem.addEventListener('submit', getCuacaApi)
 const getCuacaApDefault = async () => {
 
 
-  const responseApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=bekasi&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
+  try {
 
-  const data = await responseApi.json();
+    const responseApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=bekasi&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
 
-  // to dom
-  let cuaca = data.weather[0].main;
-  mainCuacaElem.innerHTML = cuaca.slice(0,1).toUpperCase() + cuaca.slice(1);
+    const data = await responseApi.json();
 
-  let temp = data.main.temp;
-  tempNowElem.innerHTML = temp + ' Celcius';
+    // to dom
+    let cuaca = data.weather[0].main;
+    mainCuacaElem.innerHTML = cuaca.slice(0,1).toUpperCase() + cuaca.slice(1);
 
-
-  let tekanan = data.main.pressure;
-  tekananElem.innerHTML = `${tekanan} Pha`;
+    let temp = data.main.temp;
+    tempNowElem.innerHTML = temp + ' Celcius';
 
 
-  let lembap = data.main.humidity;
-  lembapElem.innerHTML = `${lembap}`;
+    let tekanan = data.main.pressure;
+    tekananElem.innerHTML = `${tekanan} Pha`;
 
-  let angin = data.wind.speed;
-  anginElem.innerHTML = `${angin}`;
 
-  console.log(data.wind);
+    let lembap = data.main.humidity;
+    lembapElem.innerHTML = `${lembap}`;
+
+    let angin = data.wind.speed;
+    anginElem.innerHTML = `${angin}`;
+
+    console.log(data.wind);
+
+  } catch (error) {
+    console.log(error.massage)
+  }
 
 }
 
