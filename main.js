@@ -22,7 +22,7 @@ const getCuacaApi = async (evt) => {
 
     cityElem.innerHTML = inputUser.slice(0,1).toUpperCase() + inputUser.slice(1);
 
-    const responseApi = await fetch(`https://api.openweatherma.org/data/2.5/weather?q=${inputUser}&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
+    const responseApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputUser}&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
 
     const data = await responseApi.json();
 
