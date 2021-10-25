@@ -62,7 +62,7 @@ const getCuacaApDefault = async () => {
 
   try {
 
-    const responseApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=bekasi&appid=861a48eb73edd8c286596e89a64a56c6&units=metric`);
+    const responseApi = await fetch(url);
 
     const data = await responseApi.json();
 
